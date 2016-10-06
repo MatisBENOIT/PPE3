@@ -200,7 +200,6 @@ namespace MaisonDesLigues
 
             }
             BtnEnregistrerIntervenant.Enabled = VerifBtnEnregistreIntervenant();
-
         }
 
         /// <summary>
@@ -247,13 +246,19 @@ namespace MaisonDesLigues
                       MessageBox.Show("Inscription intervenant sans nuitée effectuée");
                     
                 }
-
-                
+         
             }
             catch (Exception Ex)
             {
                 MessageBox.Show(Ex.Message);
             }
+            finally
+            {
+                Bdd.RazGroupBoxRadiobutton(GrpTypeParticipant); // [Matis]
+                Bdd.RazGroupBox(GrpIdentite); // [Matis]
+                GrpIntervenant.Visible = false;
+            }
+            
         }
 
         /// <summary>

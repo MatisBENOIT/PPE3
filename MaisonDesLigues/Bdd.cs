@@ -200,7 +200,7 @@ namespace BaseDeDonnees
         // String MessageErreur="";
         //  try
         //   {                
-      
+
         //         UneSqlCommand = new SqlCommand("nouvelintervenant", cn);
         //           UneSqlCommand.CommandType = CommandType.StoredProcedure;
         //       // début de la transactionSqlServer : il vaut mieyx gérer les transactions dans l'applicatif que dans la bd.
@@ -273,9 +273,57 @@ namespace BaseDeDonnees
         /// <param name="pDateBenevolat">collection des id des dates où le bénévole sera présent</param>
         public void InscrireBenevole(String pNom, String pPrenom, String pAdresse1, String pAdresse2, String pCp, String pVille, String pTel, String pMail, DateTime pDateNaissance, Int64? pNumeroLicence, Collection<Int16> pDateBenevolat)
         {
+            // String MessageErreur = "";
+            //try
+            //{
+            //    string req = "INSERT INTO participant(nom,prenom,Adresse1,Adresse2,Cp,Ville,Tel,Mail) VALUES (@pNom, @pPrenom, @pAdresse1, @pAdresse2, @pCp, @pVille, @pTel, @pMail)";
+            //    this.cde = new SqlCommand(req, cn);
+            //    this.UneSqlCommand.Parameters.Add("@ptype", SqlDbType.VarChar).Value = "B";   // B pour Bénévole
+            //    this.UneSqlCommand.Parameters.Add("@pdateNaissance", SqlDbType.Date).Value = p;
+            //    this.UneSqlCommand.Parameters.Add("@pIdStatut", SqlDbType.VarChar).Value = pIdStatut;
+            //    UneSqlCommand.ExecuteNonQuery();
+            //    // fin de la transaction. Si on arrive à ce point, c'est qu'aucune exception n'a été levée
+            //    UneSqlTransaction.Commit();
+            //}
+            //catch (SqlException Oex)
+            //{
+            //    MessageErreur = "Erreur SqlServer \n" + this.GetMessageSql(Oex.Message);
+            //}
+            //catch (Exception ex)
+            //{
 
-
+            //    MessageErreur = ex.Message + "Autre Erreur, les informations n'ont pas été correctement saisies";
+            //}
+            //finally
+            //{
+            //    if (MessageErreur.Length > 0)
+            //    {
+            //        // annulation de la transaction
+            //        UneSqlTransaction.Rollback();
+            //        // Déclenchement de l'exception
+            //        throw new Exception(MessageErreur);
+            //    }
+            //}
         }
-
+        internal static void RazGroupBox(GroupBox unGroupBox)  // Remise à zéro des textesbox d'un groupBox [Matis]
+        {
+            for (int i = 0; i < unGroupBox.Controls.Count; i++)
+            {
+                if (unGroupBox.Controls[i] is TextBox || unGroupBox.Controls[i] is MaskedTextBox)
+                {       
+                    unGroupBox.Controls[i].ResetText();
+                }
+            }
+        }
+        internal static void RazGroupBoxRadiobutton(GroupBox unGroupBox) // Remise à zéro des RadioButton d'un groupBox [Matis]
+        {
+           foreach (Control unControl in unGroupBox.Controls)
+           {
+               if (unControl is RadioButton)
+               {
+                   ((RadioButton)unControl).Checked = false;
+               }
+           }
+        }
     }
 }
